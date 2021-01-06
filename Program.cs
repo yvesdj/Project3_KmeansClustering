@@ -23,8 +23,11 @@ namespace Project3
 
             Algorithme algorithme = new Algorithme(2, graph);
 
-            graph.UpdateGraph(algorithme.Centroids);
-            GraphRenderer.RenderGraph(graph);
+            algorithme.UpdateCentroids();
+            GraphRenderer.RenderGraph(algorithme.Graph);
+
+            algorithme.UpdateCentroids();
+            GraphRenderer.RenderGraph(algorithme.Graph);
 
             Console.ReadLine();
         }

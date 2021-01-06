@@ -10,7 +10,6 @@ namespace Project3
     public class Graph
     {
         public List<IDataPoint> DataPoints { get; set; }
-        public List<Centroid> Centroids { get; set; }
 
         private int[,] _graph;
         private int _size;
@@ -70,19 +69,8 @@ namespace Project3
             }
         }
 
-        public void UpdateGraph(List<Centroid> centroids)
+        public void UpdateGraph()
         {
-            Centroids = centroids;
-            foreach (IDataPoint data in DataPoints)
-            {
-                if (data is Centroid)
-                    DataPoints.Remove(data);
-            }
-
-            foreach (Centroid centroid in Centroids)
-            {
-                DataPoints.Add(centroid);
-            }
             CreateGraph(DataPoints);
         }
     }

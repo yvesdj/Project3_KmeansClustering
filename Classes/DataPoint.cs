@@ -19,12 +19,5 @@ namespace Project3
             X = x;
             Y = y;
         }
-
-        public void UpdatePos(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-
     }
 }

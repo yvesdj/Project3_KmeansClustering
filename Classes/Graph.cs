@@ -47,13 +47,38 @@ namespace Project3
                         {
                             switch (data)
                             {
+                                case DataPoint dataPoint:
+                                    if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.id == 0)
+                                    {
+                                        _graph[i, j] = 10;
+                                        break;
+                                    }
+
+                                    else if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.id == 1)
+                                    {
+                                        _graph[i, j] = 11;
+                                        break;
+                                    }
+                                    else if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.id == 2)
+                                    {
+                                        _graph[i, j] = 12;
+                                        break;
+                                    }
+                                    else if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.id == 3)
+                                    {
+                                        _graph[i, j] = 13;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        _graph[i, j] = 1;
+                                        break;
+                                    }
+
+
                                 //case DataPoint dataPoint:
                                 //    _graph[i, j] = 1;
                                 //    break;
-
-                                case DataPoint dataPoint:
-                                    _graph[i, j] = 1;
-                                    break;
 
                                 case Centroid centroid:
                                     _graph[i, j] = 2;

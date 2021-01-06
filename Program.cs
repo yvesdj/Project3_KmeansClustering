@@ -26,8 +26,8 @@ namespace Project3
             //Should loop
             algorithme.UpdateCentroids();
             GraphRenderer.RenderGraphClusters(algorithme.Graph);
+            algorithme.PrintAssignedValues();
 
-            algorithme.AssignDataToCentroids();
 
             Console.ReadLine();
         }

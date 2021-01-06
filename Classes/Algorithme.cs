@@ -31,7 +31,7 @@ namespace Project3.Classes
             }
         }
 
-        public void AssignDataToCentroids()
+        private void AssignDataToCentroids()
         {
             foreach (Centroid centroid in Centroids)
             {
@@ -49,11 +49,9 @@ namespace Project3.Classes
                 }
             }
 
-            PrintAssignedValues();
-
         }
 
-        private void PrintAssignedValues()
+        public void PrintAssignedValues()
         {
             int i = 1;
             foreach (IDataPoint dataPoint in Graph.DataPoints)
@@ -77,14 +75,7 @@ namespace Project3.Classes
 
         public void UpdateCentroids()
         {
-            foreach (IDataPoint data in Graph.DataPoints)
-            {
-                if (data is Centroid)
-                {
-                    data.X = random.Next(random.Next(0, Graph.GetGraph().GetLength(0)));
-                    data.Y = random.Next(random.Next(0, Graph.GetGraph().GetLength(1)));
-                }
-            }
+            AssignDataToCentroids();
             Graph.UpdateGraph();
         }
 

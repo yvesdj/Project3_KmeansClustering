@@ -46,9 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Algorithme.cs" />
+    <Compile Include="Classes\Centroid.cs" />
     <Compile Include="Classes\DataPoint.cs" />
     <Compile Include="Classes\Graph.cs" />
     <Compile Include="Classes\GraphRenderer.cs" />
+    <Compile Include="Classes\IDataPoint.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

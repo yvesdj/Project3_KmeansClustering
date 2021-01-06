@@ -16,11 +16,18 @@ namespace Project3.Classes
                 {
                     if (graph.GetGraph()[j, i] == 1)
                         Console.Write("x ");
+                    else if (graph.GetGraph()[j, i] == 2)
+                        Console.Write("█ ");
                     else
                         Console.Write(". ");
                 }
                 Console.WriteLine("#" + i + "   ");
             }
+
+            Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------");
         }
 
     }

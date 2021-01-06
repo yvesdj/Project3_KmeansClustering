@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project3
+namespace Project3.Classes
 {
-    public class DataPoint : IDataPoint
+    public class Centroid : IDataPoint
     {
+
         public int X { get; set; }
         public int Y { get; set; }
 
-        public DataPoint()
-        {
-        }
-        public DataPoint(int x, int y)
+        public Centroid(int x, int y)
         {
             X = x;
             Y = y;
@@ -25,6 +23,5 @@ namespace Project3
             X = x;
             Y = y;
         }
-
     }
 }

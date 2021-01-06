@@ -47,6 +47,10 @@ namespace Project3
                         {
                             switch (data)
                             {
+                                //case DataPoint dataPoint:
+                                //    _graph[i, j] = 1;
+                                //    break;
+
                                 case DataPoint dataPoint:
                                     _graph[i, j] = 1;
                                     break;

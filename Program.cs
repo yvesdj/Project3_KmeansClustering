@@ -23,11 +23,11 @@ namespace Project3
 
             Algorithme algorithme = new Algorithme(2, graph);
 
+            //Should loop
             algorithme.UpdateCentroids();
-            GraphRenderer.RenderGraph(algorithme.Graph);
+            GraphRenderer.RenderGraphClusters(algorithme.Graph);
 
-            algorithme.UpdateCentroids();
-            GraphRenderer.RenderGraph(algorithme.Graph);
+            algorithme.AssignDataToCentroids();
 
             Console.ReadLine();
         }
@@ -42,11 +42,13 @@ namespace Project3
                 dataPoints.Add(dataPoint);
             }
 
-            foreach (IDataPoint data in dataPoints)
+            for (int i = 0; i < dataPoints.Count; i++)
             {
-                Console.Write("X: " + data.X + "   Y: " + data.Y);
+
+                Console.Write("#" + (i + 1) + "     X: " + dataPoints[i].X + "   Y: " + dataPoints[i].Y);
                 Console.WriteLine();
             }
+            
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();

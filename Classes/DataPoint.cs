@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project3.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace Project3
     {
         public int X { get; set; }
         public int Y { get; set; }
+
+        public double Distance { get; set; }
+        public Centroid AssignedCentroid { get; set; }
 
         public DataPoint()
         {

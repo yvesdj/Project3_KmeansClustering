@@ -24,10 +24,14 @@ namespace Project3
             Algorithme algorithme = new Algorithme(2, graph);
 
             //Should loop
-            algorithme.UpdateCentroids();
+            algorithme.UpdateClusters();
             GraphRenderer.RenderGraphClusters(algorithme.Graph);
-            algorithme.PrintAssignedValues();
 
+            //while (algorithme.IsConverged)
+            //{
+                algorithme.UpdateClusters();
+                GraphRenderer.RenderGraphClusters(algorithme.Graph);
+            //}
 
             Console.ReadLine();
         }

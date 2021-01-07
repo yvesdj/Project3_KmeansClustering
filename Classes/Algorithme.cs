@@ -11,12 +11,14 @@ namespace Project3.Classes
         private Random random = new Random();
         public List<Centroid> Centroids { get; set; }
         public Graph Graph { get; set; }
+        public bool IsConverged { get; set; }
 
 
         public Algorithme(int k, Graph graph)
         {
             Graph = graph;
             GenerateCentroids(k);
+            IsConverged = false;
         }
 
         private void GenerateCentroids(int k)
@@ -44,6 +46,7 @@ namespace Project3.Classes
                         {
                             data.Distance = distance;
                             data.AssignedCentroid = centroid;
+                            centroid.DataPoints.Add(data);
                         }
                     }
                 }
@@ -51,16 +54,55 @@ namespace Project3.Classes
 
         }
 
+        private void UpdateCentroidPositions()
+        {
+            foreach (Centroid centroid in Centroids)
+            {
+                if (centroid.DataPoints.Count == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    int sumX = 0;
+                    int sumY = 0;
+                    foreach (IDataPoint data in centroid.DataPoints)
+                    {
+                        sumX += data.X;
+                        sumY += data.Y;
+                    }
+
+                    int averageX = (int)(sumX / centroid.DataPoints.Count);
+                    int averageY = (int)(sumY / centroid.DataPoints.Count);
+
+                    //if (centroid.X == )
+                    //{
+
+                    //}
+                    centroid.X = averageX;
+                    centroid.Y = averageY;
+                    centroid.DataPoints.Clear();
+                }
+            }
+        }
+
         public void PrintAssignedValues()
         {
             int i = 1;
             foreach (IDataPoint dataPoint in Graph.DataPoints)
             {
-                if (dataPoint is Centroid centroid)
-                    Console.WriteLine("{0,15} {1,5} {2,5}", "Centroid #" + i, "X: " + centroid.X, "Y: " + centroid.Y);
                 if (dataPoint is DataPoint data)
                     Console.WriteLine("{0,15} {1,5} {2,5} {3,30} {4,30}", "#" + i, "X: " + data.X,"Y: " + data.Y, "Assigned Centroid: " + (data.AssignedCentroid.id + 1), "Distance: " + data.Distance);
                 i++;
+            }
+            Console.WriteLine("------------------------------------------------------------------------------");
+            for (int j = 0; j < Centroids.Count; j++)
+            {
+                Console.WriteLine("{0,15} {1,5} {2,5}", "Centroid #" + j, "X: " + Centroids[j].X, "Y: " + Centroids[j].Y);
+                foreach (IDataPoint iData in Centroids[j].DataPoints)
+                {
+                    Console.WriteLine("{0,15} {1,5} {2,5}", "#" + i, "X: " + iData.X, "Y: " + iData.Y);
+                }
             }
             Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("------------------------------------------------------------------------------");
@@ -73,9 +115,11 @@ namespace Project3.Classes
             return Math.Sqrt(Math.Pow(centroid.X - data.X, 2) + Math.Pow(centroid.Y - data.Y, 2));
         }
 
-        public void UpdateCentroids()
+        public void UpdateClusters()
         {
             AssignDataToCentroids();
+            PrintAssignedValues();
+            UpdateCentroidPositions();
             Graph.UpdateGraph();
         }
 

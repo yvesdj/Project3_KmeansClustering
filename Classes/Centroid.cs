@@ -11,6 +11,8 @@ namespace Project3.Classes
         public int X { get; set; }
         public int Y { get; set; }
 
+        public List<IDataPoint> DataPoints { get; set; }
+
         public int id;
 
         public Centroid(int x, int y, int id)
@@ -18,6 +20,7 @@ namespace Project3.Classes
             X = x;
             Y = y;
             this.id = id;
+            DataPoints = new List<IDataPoint>();
         }
     }
 }

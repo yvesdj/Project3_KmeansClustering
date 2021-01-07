@@ -21,11 +21,7 @@ namespace Project3
 
             GraphRenderer.RenderGraphClusters(graph);
 
-            Algorithm algorithme = new Algorithm(2, graph);
-
-            //Should loop
-            //algorithme.UpdateClusters();
-            //GraphRenderer.RenderGraphClusters(algorithme.Graph);
+            Algorithm algorithme = new Algorithm(3, graph);
 
             while (algorithme.IsConverged == false)
             {

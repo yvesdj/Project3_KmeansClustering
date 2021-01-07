@@ -35,9 +35,9 @@ namespace Project3.Classes
 
         private void AssignDataToCentroids()
         {
-            foreach (Centroid centroid in Centroids)
+            foreach (IDataPoint iData in Graph.DataPoints)
             {
-                foreach (IDataPoint iData in Graph.DataPoints)
+                foreach (Centroid centroid in Centroids)
                 {
                     if (iData is DataPoint data)
                     {
@@ -51,30 +51,34 @@ namespace Project3.Classes
                     }
                 }
             }
-
+            UpdateCentroidPositions();
         }
 
         private void UpdateCentroidPositions()
         {
             foreach (Centroid centroid in Centroids)
             {
-                if (centroid.DataPoints.Count == 0)
+                int sumX = 0;
+                int sumY = 0;
+                int count = 0;
+                    
+                foreach (IDataPoint iData in Graph.DataPoints)
                 {
-                    break;
-                }
-                else
-                {
-                    int sumX = 0;
-                    int sumY = 0;
-                    foreach (IDataPoint data in centroid.DataPoints)
+                    if (iData is DataPoint data && data.AssignedCentroid == centroid)
                     {
+                        count++;
                         sumX += data.X;
                         sumY += data.Y;
                     }
+                }
 
-                    int averageX = (int)(sumX / centroid.DataPoints.Count);
-                    int averageY = (int)(sumY / centroid.DataPoints.Count);
+                Console.WriteLine("Amount of datapoints assigned to Centroid #" + centroid.Id + ":    " + count);
 
+                if (count > 0)
+                {
+                    int averageX = (int)(sumX / count);
+                    int averageY = (int)(sumY / count);
+                    Console.WriteLine("Centroid #" + centroid.Id + "Average X: " + averageX + "       Average Y: " + averageY);
                     if (averageX == centroid.X && averageY == centroid.Y)
                     {
                         centroid.IsConverged = true;
@@ -85,10 +89,18 @@ namespace Project3.Classes
                         centroid.Y = averageY;
                         centroid.DataPoints.Clear();
                     }
-
-
                 }
+                else
+                {
+                    centroid.X = random.Next(0, Graph.GetGraph().GetLength(0));
+                    centroid.Y = random.Next(0, Graph.GetGraph().GetLength(1));
+                    AssignDataToCentroids();
+                    break;
+                }
+                
+                CheckAllCentroidConverged();
             }
+            Console.WriteLine();
         }
 
         private void CheckAllCentroidConverged()
@@ -103,13 +115,23 @@ namespace Project3.Classes
 
         public void PrintAssignedValues()
         {
+            int d = 1;
+            foreach (IDataPoint iData in Graph.DataPoints)
+            {
+                if (iData is DataPoint data)
+                {
+                    Console.WriteLine("{0,15} {1,5} {2,5} {3, 30} {4, 30}", "#" + d, "X: " + data.X, "Y: " + data.Y, "Distance: " + Math.Round(data.Distance), "Assigned Centroid: #" + data.AssignedCentroid.Id);
+                    d++;
+                }
+            }
+            Console.WriteLine("------------------------------------------------------------------------------");
             for (int j = 0; j < Centroids.Count; j++)
             {
                 Console.WriteLine("{0,15} {1,5} {2,5}", "Centroid #" + j, "X: " + Centroids[j].X, "Y: " + Centroids[j].Y);
                 int i = 1;
                 foreach (IDataPoint iData in Centroids[j].DataPoints)
                 {
-                    Console.WriteLine("{0,15} {1,5} {2,5}", "#" + i, "X: " + iData.X, "Y: " + iData.Y);
+                    Console.WriteLine("{0,15} {1,5} {2,5}", "data #" + i, "X: " + iData.X, "Y: " + iData.Y);
                     i++;
                 }
             }
@@ -127,10 +149,10 @@ namespace Project3.Classes
         public void UpdateClusters()
         {
             AssignDataToCentroids();
-            PrintAssignedValues();
-            UpdateCentroidPositions();
+            //PrintAssignedValues();
+            
             Graph.UpdateGraph();
-            CheckAllCentroidConverged();
+            
         }
 
 

@@ -14,8 +14,9 @@ namespace Project3.Classes
         public List<IDataPoint> DataPoints { get; set; }
 
         public bool IsConverged { get; set; }
+        public int Id { get => id; set => id = value; }
 
-        public int id;
+        private int id;
 
         public Centroid(int x, int y, int id)
         {
@@ -23,7 +24,7 @@ namespace Project3.Classes
             Y = y;
             DataPoints = new List<IDataPoint>();
             IsConverged = false;
-            this.id = id;
+            this.Id = id;
         }
     }
 }

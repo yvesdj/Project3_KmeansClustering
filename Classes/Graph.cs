@@ -28,12 +28,10 @@ namespace Project3
         {
             DataPoints = dataPoints;
             _size = size;
-            CreateGraph(dataPoints);
+            CreateGraph();
         }
 
-
-
-        private void CreateGraph(List<IDataPoint> dataPoints)
+        private void CreateGraph()
         {
             _graph = new int[_size, _size];
 
@@ -41,7 +39,7 @@ namespace Project3
             {
                 for (int j = 0; j < _graph.GetLength(1); j++)
                 {
-                    foreach (IDataPoint data in dataPoints)
+                    foreach (IDataPoint data in DataPoints)
                     {
                         if (data.X == i && data.Y == j)
                         {
@@ -52,23 +50,23 @@ namespace Project3
                                     break;
 
                                 case DataPoint dataPoint:
-                                    if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.id == 0)
+                                    if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.Id == 0)
                                     {
                                         _graph[i, j] = 10;
                                         break;
                                     }
 
-                                    else if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.id == 1)
+                                    else if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.Id == 1)
                                     {
                                         _graph[i, j] = 11;
                                         break;
                                     }
-                                    else if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.id == 2)
+                                    else if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.Id == 2)
                                     {
                                         _graph[i, j] = 12;
                                         break;
                                     }
-                                    else if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.id == 3)
+                                    else if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.Id == 3)
                                     {
                                         _graph[i, j] = 13;
                                         break;
@@ -95,7 +93,7 @@ namespace Project3
 
         public void UpdateGraph()
         {
-            CreateGraph(DataPoints);
+            CreateGraph();
         }
     }
 }

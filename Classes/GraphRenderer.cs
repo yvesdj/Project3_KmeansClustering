@@ -46,7 +46,7 @@ namespace Project3.Classes
                         Console.Write("2 ");
                     else if (graph.GetGraph()[j, i] == 12)
                         Console.Write("3 ");
-                    else if (graph.GetGraph()[j, i] == 12)
+                    else if (graph.GetGraph()[j, i] == 13)
                         Console.Write("4 ");
                     else
                         Console.Write(". ");

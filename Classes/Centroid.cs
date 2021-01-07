@@ -13,14 +13,17 @@ namespace Project3.Classes
 
         public List<IDataPoint> DataPoints { get; set; }
 
+        public bool IsConverged { get; set; }
+
         public int id;
 
         public Centroid(int x, int y, int id)
         {
             X = x;
             Y = y;
-            this.id = id;
             DataPoints = new List<IDataPoint>();
+            IsConverged = false;
+            this.id = id;
         }
     }
 }

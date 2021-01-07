@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project3.Classes
 {
-    public class Algorithme
+    public class Algorithm
     {
         private Random random = new Random();
         public List<Centroid> Centroids { get; set; }
@@ -14,7 +14,7 @@ namespace Project3.Classes
         public bool IsConverged { get; set; }
 
 
-        public Algorithme(int k, Graph graph)
+        public Algorithm(int k, Graph graph)
         {
             Graph = graph;
             GenerateCentroids(k);
@@ -75,33 +75,42 @@ namespace Project3.Classes
                     int averageX = (int)(sumX / centroid.DataPoints.Count);
                     int averageY = (int)(sumY / centroid.DataPoints.Count);
 
-                    //if (centroid.X == )
-                    //{
+                    if (averageX == centroid.X && averageY == centroid.Y)
+                    {
+                        centroid.IsConverged = true;
+                    }
+                    else
+                    {
+                        centroid.X = averageX;
+                        centroid.Y = averageY;
+                        centroid.DataPoints.Clear();
+                    }
 
-                    //}
-                    centroid.X = averageX;
-                    centroid.Y = averageY;
-                    centroid.DataPoints.Clear();
+
                 }
+            }
+        }
+
+        private void CheckAllCentroidConverged()
+        {
+            for (int i = 0; i < Centroids.Count; i++)
+            {
+                if (!Centroids[i].IsConverged)
+                    break;
+                IsConverged = true;
             }
         }
 
         public void PrintAssignedValues()
         {
-            int i = 1;
-            foreach (IDataPoint dataPoint in Graph.DataPoints)
-            {
-                if (dataPoint is DataPoint data)
-                    Console.WriteLine("{0,15} {1,5} {2,5} {3,30} {4,30}", "#" + i, "X: " + data.X,"Y: " + data.Y, "Assigned Centroid: " + (data.AssignedCentroid.id + 1), "Distance: " + data.Distance);
-                i++;
-            }
-            Console.WriteLine("------------------------------------------------------------------------------");
             for (int j = 0; j < Centroids.Count; j++)
             {
                 Console.WriteLine("{0,15} {1,5} {2,5}", "Centroid #" + j, "X: " + Centroids[j].X, "Y: " + Centroids[j].Y);
+                int i = 1;
                 foreach (IDataPoint iData in Centroids[j].DataPoints)
                 {
                     Console.WriteLine("{0,15} {1,5} {2,5}", "#" + i, "X: " + iData.X, "Y: " + iData.Y);
+                    i++;
                 }
             }
             Console.WriteLine("------------------------------------------------------------------------------");
@@ -121,6 +130,7 @@ namespace Project3.Classes
             PrintAssignedValues();
             UpdateCentroidPositions();
             Graph.UpdateGraph();
+            CheckAllCentroidConverged();
         }
 
 

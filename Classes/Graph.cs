@@ -47,6 +47,10 @@ namespace Project3
                         {
                             switch (data)
                             {
+                                case Centroid centroid:
+                                    _graph[i, j] = 2;
+                                    break;
+
                                 case DataPoint dataPoint:
                                     if (dataPoint.AssignedCentroid != null && dataPoint.AssignedCentroid.id == 0)
                                     {
@@ -74,15 +78,6 @@ namespace Project3
                                         _graph[i, j] = 1;
                                         break;
                                     }
-
-
-                                //case DataPoint dataPoint:
-                                //    _graph[i, j] = 1;
-                                //    break;
-
-                                case Centroid centroid:
-                                    _graph[i, j] = 2;
-                                    break;
 
                                 default:
                                     break;

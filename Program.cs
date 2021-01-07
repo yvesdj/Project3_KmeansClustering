@@ -12,26 +12,26 @@ namespace Project3
     {
         static void Main(string[] args)
         {
-            int[] xCoords = { 25, 34, 22, 27, 33, 33, 31, 22, 35, 34, 67, 54, 57, 43, 50, 57, 59, 52, 65, 47, 49, 48, 35, 33, 44, 45, 38, 43, 51, 46, 0, 99 };
-            int[] yCoords = { 79, 51, 53, 78, 59, 74, 73, 57, 69, 75, 51, 32, 40, 47, 53, 36, 35, 58, 59, 50, 25, 20, 14, 12, 20, 5, 29, 27, 8, 7, 0, 99 };
+            int[] xCoords = { 25, 34, 22, 27, 33, 33, 31, 22, 35, 34, 67, 54, 57, 43, 50, 57, 59, 52, 65, 47, 49, 48, 35, 33, 44, 45, 38, 43, 51, 46 };
+            int[] yCoords = { 79, 51, 53, 78, 59, 74, 73, 57, 69, 75, 51, 32, 40, 47, 53, 36, 35, 58, 59, 50, 25, 20, 14, 12, 20, 5, 29, 27, 8, 7 };
 
             List<IDataPoint> dataPoints = GetDataPoints(xCoords, yCoords);
 
             Graph graph = new Graph(dataPoints, 100);
 
-            GraphRenderer.RenderGraph(graph);
+            GraphRenderer.RenderGraphClusters(graph);
 
-            Algorithme algorithme = new Algorithme(2, graph);
+            Algorithm algorithme = new Algorithm(2, graph);
 
             //Should loop
-            algorithme.UpdateClusters();
-            GraphRenderer.RenderGraphClusters(algorithme.Graph);
+            //algorithme.UpdateClusters();
+            //GraphRenderer.RenderGraphClusters(algorithme.Graph);
 
-            //while (algorithme.IsConverged)
-            //{
+            while (algorithme.IsConverged == false)
+            {
                 algorithme.UpdateClusters();
                 GraphRenderer.RenderGraphClusters(algorithme.Graph);
-            //}
+            }
 
             Console.ReadLine();
         }
